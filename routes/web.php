@@ -2,37 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('admin.clientes');
 });
 
-Route::any('/any', function () {
-    return 'Permite todos os tipos de requisição HTTP (GET, POST, PUT, DELETE)';
-});
+Route::group([
+    'prefix' => 'admin',
+    'as' => 'admin.'
+], function(){
+    Route::get('dashboard', function(){
+        return 'Dashboard Admin';
+    })->name('dashboard');
 
-Route::match(['get', 'post'], '/match', function () {
-    return 'Permite apenas os tipos de requisição HTTP (GET, POST)';
-});
+    Route::get('users', function(){
+        return 'Data Users';
+    })->name('users');
 
-Route::get('/produto/{id}/{cat?}', function ($id, $cat = 'sem categoria') {
-    return 'O id do produto é: ' . $id . '<br> A categoria é: ' . $cat;
-});
-
-Route::get('news', function(){
-    return view('news');
-})->name('noticias');
-
-Route::get('novidades', function(){
-    return redirect()->route('noticias');
+    Route::get('clientes', function(){
+        return 'Data Clientes';
+    })->name('clientes');
 });
