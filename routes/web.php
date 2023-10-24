@@ -17,10 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/empresa', function () {
-    return view('site.empresa');
-});
-
 Route::any('/any', function () {
     return 'Permite todos os tipos de requisição HTTP (GET, POST, PUT, DELETE)';
 });
@@ -32,3 +28,6 @@ Route::match(['get', 'post'], '/match', function () {
 Route::get('/produto/{id}/{cat?}', function ($id, $cat = 'sem categoria') {
     return 'O id do produto é: ' . $id . '<br> A categoria é: ' . $cat;
 });
+
+Route::redirect('sobre', 'empresa');
+Route::view('empresa', 'site.empresa');
