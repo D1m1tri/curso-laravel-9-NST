@@ -16,8 +16,18 @@ return new class extends Migration
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nomee');
-            $table->string('nomecompleto');
+
+            $table->string('nome');
+            $table->text('descricao');
+            $table->double('preco', 8, 2);
+            $table->string('slug');
+            $table->string('imagem')->nullable();
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+
+            $table->unsignedBigInteger('categoria_id');
+            $table->foreign('categoria_id')->references('id')->on('categorias')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
