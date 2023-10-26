@@ -14,8 +14,9 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::all();
-        return dd($produtos);
+        //$produtos = Produto::all();
+        //return dd($produtos);
+        return view('site.home');
     }
 
     /**
