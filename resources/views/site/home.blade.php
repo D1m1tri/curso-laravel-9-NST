@@ -5,57 +5,25 @@
 @section('conteudo')
 
     <div class="row container">
-        <div class="col s12 m3">
-            <div class="card">
-                <div class="card-image">
-                    <img src="images/sample-1.jpg">
-                    <span class="card-title">Card Title</span>
-                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-                </div>
-                <div class="card-content">
-                    <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m3">
-            <div class=card>
-                <div class=card-image>
-                    <img src="">
-                    <span class="card-title">Nome do Produto</span>
-                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add_shopping_cart</i></a>
-                </div>
-                <div class="card-content">
-                    <p>Descrição do Produto</p>
-                    <p>R$ 99,99</p>
+        @foreach($produtos as $produto)
+            <div class="col s12 m4 l3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="{{ $produto->imagem }}">
+                        <a href="{{ route( 'site.details', $produto->slug )}}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">{{ $produto->nome }}</span>
+                        <p>{{ Str::limit($produto->descricao, 20) }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col s12 m3">
-            <div class=card>
-                <div class=card-image>
-                    <img src="">
-                    <span class="card-title">Nome do Produto</span>
-                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add_shopping_cart</i></a>
-                </div>
-                <div class="card-content">
-                    <p>Descrição do Produto</p>
-                    <p>R$ 99,99</p>
-                </div>
-            </div>
-        </div>
-        <div class="col s12 m3">
-            <div class=card>
-                <div class=card-image>
-                    <img src="">
-                    <span class="card-title">Nome do Produto</span>
-                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add_shopping_cart</i></a>
-                </div>
-                <div class="card-content">
-                    <p>Descrição do Produto</p>
-                    <p>R$ 99,99</p>
-                </div>
-            </div>
-        </div>
+        @endforeach
+
+    </div>
+
+    <div class="center">
+        {{ $produtos->links('custom.pagination') }}
     </div>
 
 @endsection
