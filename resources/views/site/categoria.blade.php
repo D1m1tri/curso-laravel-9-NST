@@ -4,7 +4,7 @@
 
 @section('conteudo')
 
-    <h3>Produtos da categoria:</h3>
+    <h3>Produtos da categoria: {{ $categoria->nome }}</h3>
 
     <div class="row container">
         @foreach($produtos as $produto)
