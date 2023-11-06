@@ -33,7 +33,14 @@
                             </i>
                         </a>
                     </li>
-                    <li><a href="">Carrinho</a></li>
+                    <li>
+                        <a href="{{ route('site.carrinho') }}">
+                            Carrinho
+                            <span class="new badge blue" data-badge-caption="">
+                                {{ \Cart::getContent()->count() }}
+                            </span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
