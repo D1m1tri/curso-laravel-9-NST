@@ -18,11 +18,18 @@ class LoginController extends Controller
         ]);
         if(Auth::attempt($credenciais)){
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            return redirect()->intended('/admin/dashboard');
         }else{
             return redirect()->back()->withErrors([
                 'erro' => 'Verifique suas credenciais e tente novamente.'
             ]);
         }
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('site.index');
     }
 }
