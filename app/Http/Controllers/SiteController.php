@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Produto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class SiteController extends Controller
 {
@@ -19,9 +20,18 @@ class SiteController extends Controller
     public function details($slug) {
         $produto = Produto::where('slug', $slug)->first();
 
-        return view('site.details', [
-            'produto' => $produto
-        ]);
+        // Gate::authorize('ver-produto', $produto); // Gate facade
+        // $this->authorize('ver-produto', $produto); // This is the same as the above line,
+                                                   // but using the Policy
+        if(auth()->user()->can('verProduto', $produto)){
+            return view('site.details', [
+                'produto' => $produto
+            ]);
+        }
+
+        if(auth()->user()->cannot('verProduto', $produto)){
+            return redirect()->route('site.index');
+        }
     }
 
     public function categoria($id) {
