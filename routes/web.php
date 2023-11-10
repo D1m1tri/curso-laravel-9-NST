@@ -10,8 +10,8 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
 
-Route::resource('produtos', ProdutoController::class);
-Route::resource('users', UserController::class);
+//Route::resource('produtos', ProdutoController::class);
+//Route::resource('users', UserController::class);
 
 Route::get('produto/{slug}', [SiteController::class, 'details'])->name('site.details');
 Route::get('categoria/{id}', [SiteController::class, 'categoria'])->name('site.categoria');
@@ -27,4 +27,5 @@ Route::post('auth', [LoginController::class, 'auth'])->name('login.auth');
 Route::get('logout', [LoginController::class, 'logout'])->name('login.logout');
 Route::get('register', [LoginController::class, 'create'])->name('login.register');
 
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'checkemail']);
+Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'checkemail']);
+Route::get('admin/produtos', [ProdutoController::class, 'index'])->name('admin.produtos')->middleware(['auth', 'checkemail']);
