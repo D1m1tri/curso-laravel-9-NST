@@ -11,7 +11,7 @@ use App\Http\Controllers\UserController;
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
 
 //Route::resource('produtos', ProdutoController::class);
-//Route::resource('users', UserController::class);
+Route::resource('users', UserController::class);
 
 Route::get('produto/{slug}', [SiteController::class, 'details'])->name('site.details');
 Route::get('categoria/{id}', [SiteController::class, 'categoria'])->name('site.categoria');

@@ -63,7 +63,7 @@
             data: {
                 labels: ['{!! $userAno !!}'],
                 datasets: [{
-                    label: ['{!! $userLabel !!}'],
+                    label: ["{!! $userLabel !!}"],
                     data: [{{ $userTotal }}],
                     backgroundColor: [
                         'rgba(255, 99, 132, 1)',

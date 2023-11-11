@@ -39,13 +39,15 @@ class DashboardController extends Controller
 
         // preparando dados para o grafico
         foreach ($catData as $cat) {
-            $catNome[] = "'".$cat->nome."'";
+            $catNome[] = '"'.$cat->nome.'"';
             $catTotal[] = $cat->produtos->count();
         }
 
         // formatar para chartjs
-        $catLabel = implode(",", $catNome);
+        $catLabel = implode(',', $catNome);
         $catTotal = implode(',', $catTotal);
+
+        // dd($catTotal, $catLabel);
 
 
         return view('admin.dashboard', [
