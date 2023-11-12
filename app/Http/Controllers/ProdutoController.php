@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Produto;
+use App\Models\{Produto, Categoria};
+use Illuminate\Support\Str;
 
 class ProdutoController extends Controller
 {
@@ -15,9 +16,11 @@ class ProdutoController extends Controller
     public function index()
     {
         $produtos = Produto::paginate(10);
+        $categorias = Categoria::all();
         //return dd($produtos);
         return view('admin.produtos', [
-            'produtos' => $produtos
+            'produtos' => $produtos,
+            'categorias' => $categorias
         ]);
     }
 
@@ -39,7 +42,17 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $produto = $request->all();
+
+        if($request->imagem){
+            $produto['imagem'] = $request->imagem->store('produtos');
+        }
+
+        $produto['slug'] = Str::slug($request->nome, '-');
+
+        $produto = Produto::create($produto);
+
+        return redirect()->route('admin.produtos')->with('sucesso', 'Produto cadastrado com sucesso!');
     }
 
     /**
@@ -84,6 +97,8 @@ class ProdutoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $produto  = Produto::find($id);
+        $produto->delete();
+        return redirect()->route('admin.produtos')->with('sucesso', 'Produto excluído com sucesso!');
     }
 }
